@@ -17,7 +17,7 @@ module.exports = async (request, response) => {
       avatar_url: `https://raw.githubusercontent.com/IanMitchell/sentry-discord/master/sentry-icon.png`,
       embeds: [
         {
-          title: body.project_name,
+          title: body.event.message,
           type: 'rich',
           description: body.message,
           url: body.url,
