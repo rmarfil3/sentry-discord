@@ -8,6 +8,13 @@ const COLORS = {
   fatal: parseInt('d20f2a', 16),
 };
 
+const DISPLAY_EVENT_TAGS = [
+  'browser',
+  'client_os',
+  'transaction',
+  'url',
+];
+
 module.exports = async (request, response) => {
   try {
     const { body } = request;
@@ -41,11 +48,13 @@ module.exports = async (request, response) => {
 
     if (body.event.tags) {
       body.event.tags.forEach(([key, value]) => {
-        payload.embeds[0].fields.push({
-          name: key,
-          value,
-          inline: true,
-        });
+        if (DISPLAY_EVENT_TAGS.indexOf(key) !== -1) { 
+          payload.embeds[0].fields.push({
+            name: key,
+            value,
+            inline: true,
+          });
+        }
       });
     }
 
